@@ -1,4 +1,4 @@
-# Crypto & Stocks Dashboard API
+# Crypto & Stocks & FX Dashboard API
 
 ## Описание
 
