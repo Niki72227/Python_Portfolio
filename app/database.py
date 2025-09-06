@@ -4,7 +4,7 @@ import os
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+psycopg2://postgres:postgres@db:5432/dashboard"
+    "postgresql+psycopg2://postgres:postgres@db:5432/crypto_django_dashboard"
 )
 
 engine = create_engine(DATABASE_URL)

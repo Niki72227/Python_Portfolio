@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: dashboard
+      POSTGRES_DB: crypto_django_dashboard
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/dashboard
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/crypto_django_dashboard
     ports:
       - "8000:8000"
 
