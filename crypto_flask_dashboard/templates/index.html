@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto & Stocks Dashboard (Flask)</title>
+</head>
+<body>
+    <h1>Crypto & Stocks Dashboard (Flask)</h1>
+    <form method="post">
+        Symbol: <input name="symbol" value="{{ symbol }}">
+        Start: <input name="start" value="{{ start }}">
+        End: <input name="end" value="{{ end }}">
+        <button type="submit">Show</button>
+    </form>
+    <h2>Average price: {{ average }}</h2>
+    {% if plot_img %}
+        <img src="{{ plot_img }}">
+    {% endif %}
+    <h2>History</h2>
+    <table border="1">
+        <tr><th>Date</th><th>Price</th></tr>
+        {% for row in history %}
+            <tr>
+                <td>{{ row.date }}</td>
+                <td>{{ row.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
