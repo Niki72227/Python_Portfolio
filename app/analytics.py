@@ -16,7 +16,7 @@ def calc_average_and_plot(symbol, start, end, db):
     avg = df["price"].mean()
     plt.figure(figsize=(8, 4))
     plt.plot(df["date"], df["price"], marker="o")
-    plt.title(f"Price of {symbol}")
+    plt.title(f"Price of {symbol.upper()}")
     plt.xlabel("Date")
     plt.ylabel("Price")
     plt.grid(True)

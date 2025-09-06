@@ -11,8 +11,8 @@ def index():
     start = request.form.get("start", "2025-09-01T00:00:00")
     end = request.form.get("end", "2025-09-05T23:59:59")
 
-    analytics = requests.get(f"{API_URL}/analytics/{symbol}", params={"start": start, "end": end}).json()
-    history = requests.get(f"{API_URL}/history/{symbol}", params={"start": start, "end": end}).json()
+    analytics = requests.get(f"{API_URL}/analytics/{symbol.lower()}", params={"start": start, "end": end}).json()
+    history = requests.get(f"{API_URL}/history/{symbol.lower()}", params={"start": start, "end": end}).json()
 
     plot_img = None
     if analytics.get("plot"):
