@@ -5,7 +5,7 @@ from app.models import Base
 from app import crud, schemas, analytics
 
 Base.metadata.create_all(bind=engine)
-app = FastAPI(title="Crypto & Stocks Dashboard API")
+app = FastAPI(title="Crypto & Stocks & FX Dashboard API")
 
 
 def get_db():
@@ -30,7 +30,7 @@ def get_forex(first_ccy: str,
 ):
     return crud.get_forex_price(first_ccy.lower(), second_ccy.lower(), db)
 
-@app.get("/history/{symbol}", response_model=list[schemas.History])
+@app.get("/history/{symbol}", response_model=list[schemas.History], tags = ["History"])
 def get_history(
     symbol: str,
     start: str = Query(..., description="Start datetime in ISO format"),
@@ -39,7 +39,7 @@ def get_history(
 ):
     return crud.get_history(symbol, start, end, db)
 
-@app.get("/analytics/{symbol}")
+@app.get("/analytics/{symbol}", tags = ["Analytics"])
 def get_analytics(
     symbol: str,
     start: str = Query(..., description="Start datetime in ISO format"),

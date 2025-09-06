@@ -6,3 +6,4 @@ async def get_binance_price(symbol: str) -> float:
         response = await client.get(url)
         data = response.json()
         return float(data["price"])
+
