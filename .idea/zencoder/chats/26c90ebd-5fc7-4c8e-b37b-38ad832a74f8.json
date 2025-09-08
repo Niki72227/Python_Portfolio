@@ -1,0 +1,86 @@
+{
+    "checksum": "4f0a3e1f7024e14812dd933d27856b69b2181b80b8ae9f0149430dba116376fe",
+    "data": {
+    "id": "26c90ebd-5fc7-4c8e-b37b-38ad832a74f8",
+    "createdAt": 1757285452815,
+    "updatedAt": 1757285456043,
+    "title": "Отслеживание Форм в Django",
+    "messages": [
+        {
+            "id": "e1f39c08-18f1-4dc1-ae13-cf0279ad9bcd",
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Если у меня на страничке несколько форм как мне отследивать какая именно форма была заполненва и отправлена?"
+                }
+            ],
+            "context": {
+                "currentFile": {
+                    "path": "django_analytics_dashboard/mainapp/templates/mainapp/index.html",
+                    "fsPath": "/Users/nikich/Documents/GitHub/Python_Portfolio/django_analytics_dashboard/mainapp/templates/mainapp/index.html",
+                    "sources": [
+                        "opened_tab"
+                    ],
+                    "content": "{% extends 'mainapp/layout.html' %}\n\n{% block title %}Main(Django){% endblock %}\n\n{% block content %}\n<h3>Crypto & Stocks & FX Dashboard (Django)</h3>\n    <form method=\"get\">\n        Symbol: <input name=\"symbol\" value=\"{{ symbol }}\">\n        <button type=\"submit\">Show</button>\n    </form>\n    <h3>Price: {{ price }}</h3>\n{% endblock %}",
+                    "language": "html"
+                },
+                "codebaseEnabled": false
+            },
+            "createdAt": 1757285452844,
+            "isInternal": false,
+            "rawContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Если у меня на страничке несколько форм как мне отследивать какая именно форма была заполненва и отправлена?"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "autoAppliedRules": []
+        },
+        {
+            "id": "9ce1ba6c-182c-4a13-b377-9d26e4c05fe7",
+            "role": "assistant",
+            "content": [
+                {
+                    "type": "thought",
+                    "text": "**Providing minimal examples**\n\nI'm thinking about providing minimal examples in Django for both views and templates. This way, I can make the concepts clear without overwhelming anyone. I want to ensure that the examples are concise and focused, so users can easily follow along. I'll aim for simplicity in the code to illustrate basic functionality while keeping it functional. Let's get started on these Django examples!"
+                },
+                {
+                    "type": "text",
+                    "text": "# Как определить, какая форма отправлена на странице\n\nНиже — короткие и надёжные способы для Django.\n\n## 1) Кнопка submit с именем и значением (самый простой)\nВ шаблоне:\n```html\n<form method=\"post\">\n  {% csrf_token %}\n  <!-- поля формы A -->\n  <button type=\"submit\" name=\"action\" value=\"form_a\">Сохранить A</button>\n</form>\n\n<form method=\"post\">\n  {% csrf_token %}\n  <!-- поля формы B -->\n  <button type=\"submit\" name=\"action\" value=\"form_b\">Сохранить B</button>\n</form>\n```\n\nВ представлении:\n```python\ndef view(request):\n    if request.method == 'POST':\n        action = request.POST.get('action')\n        if action == 'form_a':\n            # обработка формы A\n            ...\n        elif action == 'form_b':\n            # обработка формы B\n            ...\n    ...\n```\n\n## 2) Скрытое поле с идентификатором формы\nВ шаблоне:\n```html\n<form method=\"post\">\n  {% csrf_token %}\n  <input type=\"hidden\" name=\"form_id\" value=\"crypto\">\n  ...\n</form>\n\n<form method=\"post\">\n  {% csrf_token %}\n  <input type=\"hidden\" name=\"form_id\" value=\"stocks\">\n  ...\n</form>\n```\n\nВ представлении:\n```python\nform_id = request.POST.get('form_id')\nif form_id == 'crypto':\n    ...\nelif form_id == 'stocks':\n    ...\n```\n\n## 3) Разные URL (action) для форм\n- **Плюс**: простая маршрутизация.\n- **Минус**: больше роутов.\n```html\n<form method=\"post\" action=\"{% url 'handle_crypto' %}\">...</form>\n<form method=\"post\" action=\"{% url 'handle_stocks' %}\">...</form>\n```\n\n## 4) Префиксы Django-форм\nПолезно, если на странице одинаковые типы форм.\nВ шаблоне:\n```html\n<form method=\"post\">\n  {% csrf_token %}\n  {{ form_a.management_form }}\n  {{ form_a.as_p }}\n  <button type=\"submit\" name=\"action\" value=\"a\">Отправить A</button>\n</form>\n\n<form method=\"post\">\n  {% csrf_token %}\n  {{ form_b.management_form }}\n  {{ form_b.as_p }}\n  <button type=\"submit\" name=\"action\" value=\"b\">Отправить B</button>\n</form>\n```\n\nВ представлении:\n```python\ndef view(request):\n    form_a = FormA(prefix='a')\n    form_b = FormB(prefix='b')\n\n    if request.method == 'POST':\n        action = request.POST.get('action')\n        if action == 'a':\n            form_a = FormA(request.POST, prefix='a')\n            if form_a.is_valid():\n                ...\n        elif action == 'b':\n            form_b = FormB(request.POST, prefix='b')\n            if form_b.is_valid():\n                ...\n```\n\nРекомендация: чаще всего хватает варианта с кнопкой submit (`name=\"action\" value=\"...\"`). Это читаемо и не ломается при пустых полях."
+                }
+            ],
+            "context": {
+                "author": "Coding Agent",
+                "operationId": "c13689a6-4c41-4752-8e6e-18f2eaefea54",
+                "usageStatistics": {
+                    "llmCallsUsedForAnswer": 1.0,
+                    "llmCallsUsedTotal": 1.0,
+                    "llmCallsLimit": 25.0,
+                    "limitRenewalMillisecondTimestamp": 1757340849318
+                }
+            },
+            "createdAt": 1757285456043,
+            "isInternal": false
+        }
+    ],
+    "isAgent": true,
+    "isNameGenerated": true,
+    "isCustomAgent": false,
+    "isUnitTestsAgent": false,
+    "isE2EAgent": false,
+    "isQnaAgent": false,
+    "isRepoInfoAgent": false,
+    "isClaudeCode": false,
+    "autoApply": true,
+    "model": "default"
+}
+}

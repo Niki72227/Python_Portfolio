@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ai.zencoder.plugin.chat.index">
-    <option name="activeChatId" value="f253d7a6-8192-4566-8195-12a2c9eb1a89" />
-    <option name="chatMetadata" value="{&quot;f253d7a6-8192-4566-8195-12a2c9eb1a89&quot;:{&quot;id&quot;:&quot;f253d7a6-8192-4566-8195-12a2c9eb1a89&quot;,&quot;title&quot;:&quot;Flask Module Not Found Solution&quot;,&quot;createdAt&quot;:1757173156044,&quot;updatedAt&quot;:1757173158525,&quot;isAgent&quot;:true,&quot;isNameGenerated&quot;:true,&quot;messageCount&quot;:2,&quot;lastMessagePreview&quot;:&quot;**Resolving Flask module issue**\n\nI need to help the user with a missing Flask module, probably in t...&quot;}}" />
+    <option name="activeChatId" value="26c90ebd-5fc7-4c8e-b37b-38ad832a74f8" />
+    <option name="chatMetadata" value="{&quot;26c90ebd-5fc7-4c8e-b37b-38ad832a74f8&quot;:{&quot;id&quot;:&quot;26c90ebd-5fc7-4c8e-b37b-38ad832a74f8&quot;,&quot;title&quot;:&quot;Отслеживание Форм в Django&quot;,&quot;createdAt&quot;:1757285452815,&quot;updatedAt&quot;:1757285456043,&quot;isAgent&quot;:true,&quot;isNameGenerated&quot;:true,&quot;messageCount&quot;:2,&quot;lastMessagePreview&quot;:&quot;**Providing minimal examples**\n\nI'm thinking about providing minimal examples in Django for both vie...&quot;},&quot;f253d7a6-8192-4566-8195-12a2c9eb1a89&quot;:{&quot;id&quot;:&quot;f253d7a6-8192-4566-8195-12a2c9eb1a89&quot;,&quot;title&quot;:&quot;Flask Module Not Found Solution&quot;,&quot;createdAt&quot;:1757173156044,&quot;updatedAt&quot;:1757173158525,&quot;isAgent&quot;:true,&quot;isNameGenerated&quot;:true,&quot;messageCount&quot;:2,&quot;lastMessagePreview&quot;:&quot;**Resolving Flask module issue**\n\nI need to help the user with a missing Flask module, probably in t...&quot;}}" />
   </component>
 </project>

@@ -39,6 +39,12 @@ def get_history(
 ):
     return crud.get_history(symbol, start, end, db)
 
+@app.get("/history_all", response_model=list[schemas.History], tags = ["History"])
+def get_history_all(
+    db: Session = Depends(get_db)
+):
+    return crud.get_history_all(db)
+
 @app.get("/analytics/{symbol}", tags = ["Analytics"])
 def get_analytics(
     symbol: str,

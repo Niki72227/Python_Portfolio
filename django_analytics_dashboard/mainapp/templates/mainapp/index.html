@@ -1,29 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Crypto & Stocks & FX Dashboard (Django)</title>
-</head>
-<body>
-    <h1>Crypto & Stocks & FX Dashboard (Django)</h1>
-    <form method="get">
-        Symbol: <input name="symbol" value="{{ symbol }}">
-        Start: <input name="start" value="{{ start }}">
-        End: <input name="end" value="{{ end }}">
-        <button type="submit">Show</button>
-    </form>
-    <h2>Average price: {{ average }}</h2>
-    {% if plot_img %}
-        <img src="{{ plot_img }}">
-    {% endif %}
-    <h2>History</h2>
+{% extends 'mainapp/layout.html' %}
+
+{% block title %}Main(Django){% endblock %}
+
+{% block content %}
+<h2>Crypto & Stocks & FX Dashboard (Django)</h2>
     <table border="1">
-        <tr><th>Date</th><th>Price</th></tr>
-        {% for row in history %}
+        <tr>
+            <th>Instrument Type</th>
+            <th>Symbol</th>
+            <th> </th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>
+                Crypto Symbol:
+            </td>
+            <form method="get">
+                {% csrf_token %}
+                <td>
+                    <input name="crypto_symbol" value="{{ crypto_symbol }}">
+                </td>
+                <td>
+                    <button type="submit" name="action" value="crypto">Show</button>
+                </td>
+            </form>
+
+            <th>
+                {{ price_crypto }}
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Stock Symbol:
+            </td>
+            <form method="get">
+                {% csrf_token %}
+                <td>
+                    <input name="stock_symbol" value="{{ stock_symbol }}">
+                </td>
+                <td>
+                    <button type="submit" name="action" value="stock">Show</button>
+                </td>
+            </form>
+            <th>
+                {{ price_stock }}
+            </th>
+        </tr>
+        <form method="get">
+            {% csrf_token %}
             <tr>
-                <td>{{ row.date }}</td>
-                <td>{{ row.price }}</td>
+                <td>
+                    First Currency:
+                </td>
+                <td>
+                    <input name="first_currency" value="{{ first_currency }}">
+                </td>
+                <td rowspan="2">
+                    <button type="submit" name="action" value="forex">Show</button>
+                </td>
+                <th rowspan="2">
+                    {{ price_forex }}
+                </th>
             </tr>
-        {% endfor %}
+            <tr>
+                <td>Second Currency:</td>
+                <td><input name="second_currency" value="{{ second_currency }}"></td>
+            </tr>
+        </form>
     </table>
-</body>
-</html>
+{% endblock %}

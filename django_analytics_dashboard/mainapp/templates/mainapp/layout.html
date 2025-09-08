@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+      {% block header %}
+        <header style="position: fixed; top:0px; width: 100%; z-index: 100; background-color: #FFEEDD80;  height:8vh; text-align:center">
+            <h1>Portfolio Project</h1>
+        </header>
+      {% endblock %}
+      <main style="margin-top:8vh;">
+        {% block navbar %}
+        <div class="navbar" style="position:fixed; left:0px; background-color: #A7C7E780 ; color:white; width:20%; height:100vh; float: left">
+            <ul>
+                <li><a href="{% url 'index' %}">Main</a></li>
+                <li><a href="{% url 'queries' %}">Queries</a></li>
+                <li><a href="{% url 'history' %}">History</a></li>
+            </ul>
+        </div>
+        <div class="content" style="width:80%; height:-webkit-fill-available; overflow-y:auto; overflow-x:hidden; display:flex; flex-direction:column; align-items:flex-start; justify-content; float:left; background-color:#EEDDFF80; padding-left: 20%">
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+      </main>
+</body>
+</html>

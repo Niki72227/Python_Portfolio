@@ -46,3 +46,6 @@ def get_history(symbol: str, start: str, end: str, db: Session):
         History.date >= start_dt,
         History.date <= end_dt
     ).all()
+
+def get_history_all(db: Session):
+    return db.query(History).all()
