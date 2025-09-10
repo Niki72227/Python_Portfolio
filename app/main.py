@@ -53,3 +53,7 @@ def get_analytics(
     db: Session = Depends(get_db)
 ):
     return analytics.calc_average_and_plot(symbol, start, end, db)
+
+@app.get("/crypto_symbols_all", response_model=list[schemas.All_Crypto_Symbols], tags = ["Extra"])
+async def get_crypto_symbols_all(db: Session = Depends(get_db)):
+    return await crud.get_all_crypto_symbols(db)

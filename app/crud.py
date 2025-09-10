@@ -1,9 +1,10 @@
 from sqlalchemy.orm import Session
-from app.models import Asset, History
+from app.models import Asset, History, All_Crypto_Symbols
 from datetime import datetime
-from app.clients.binance import get_binance_price
+from app.clients.binance import get_binance_price, get_all_symbols
 from app.clients.nasdaq import get_nasdaq_price
 from app.clients.forex import get_ccy
+from sqlalchemy import delete
 
 async def get_crypto_price(symbol: str, db: Session):
     price = await get_binance_price(symbol)
@@ -15,6 +16,17 @@ async def get_crypto_price(symbol: str, db: Session):
     db.add(history)
     db.commit()
     return asset
+
+async def get_all_crypto_symbols(db: Session):
+    get_all_crypto_symbols = await get_all_symbols()
+    db.execute(delete(All_Crypto_Symbols))
+    db.commit()
+    for i in get_all_crypto_symbols:
+        crypto_symbol = All_Crypto_Symbols(symbol=i)
+        db.add(crypto_symbol)
+        db.commit()
+        db.refresh(crypto_symbol)
+    return db.query(All_Crypto_Symbols).all()
 
 def get_stock_price(symbol: str, db: Session):
     price = get_nasdaq_price(symbol)

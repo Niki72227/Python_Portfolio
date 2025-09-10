@@ -6,8 +6,8 @@
     <h1>Crypto & Stocks & FX Dashboard (Django)</h1>
     <form method="get">
         Symbol: <input name="symbol" value="{{ symbol }}">
-        Start: <input name="start" value="{{ start }}">
-        End: <input name="end" value="{{ end }}">
+        Start: <input type = "datetime-local" name="start" value="{{ start }}">
+        End: <input type = "datetime-local"  name="end" value="{{ end }}">
         <button type="submit">Show</button>
     </form>
     <h2>Average price: {{ average }}</h2>

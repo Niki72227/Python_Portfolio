@@ -31,6 +31,8 @@ def index(request):
             context = {"first_currency": first_currency.upper(), "second_currency": second_currency.upper(), "price_forex": price}
         else:
             price = "invalid form"
+    all_crypto_symbols = requests.get(f"{API_URL}/crypto_symbols_all").json()
+    context["all_crypto_symbols"] = all_crypto_symbols
     return render(
         request,
             template_name = "mainapp/index.html",

@@ -19,3 +19,9 @@ class History(BaseModel):
 
     class Config:
         orm_mode = True
+
+class All_Crypto_Symbols(BaseModel):
+    id: int
+    symbol: str
+    class Config:
+        orm_mode = True

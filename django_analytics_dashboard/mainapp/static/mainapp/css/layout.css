@@ -1,0 +1,77 @@
+body {
+    background: #f6f9d1;
+}
+header {
+    position: fixed;
+    top:0px;
+    width: 100%;
+    z-index: 100;
+    background-color: #b8c7a4;
+    height:8vh;
+    -webkit-align-content: center;
+}
+header h1 {
+    color: #182e46;
+}
+header .logo {
+    float: left;
+    padding-left: 1%;
+}
+header .credentials {
+    float: right;
+    text-align: end;
+    padding-right: 1%;
+    text-decoration: none;
+}
+header a {
+    text-decoration: none;
+    color: #182e46;
+}
+header a:hover {
+    color: white;
+}
+aside {
+    position:fixed;
+    left:0px;
+    background-color: #182e46 ;
+    color:white;
+    width:20%;
+    height:100vh;
+    border-right: 5px solid #005275;
+    border-top: 5px solid #005275;
+}
+aside ul {list-style:none}
+aside ul li {
+    color: #fff;
+    display: block;
+    margin-top: 5%;
+    transition: all.2s ease;
+}
+aside ul li:hover{
+    color: #f6f9d1;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+aside h2 {
+    padding-top: 5%;
+    padding-left: 4%;
+}
+aside ul a {
+    text-decoration:none;
+}
+aside h2 i {
+    float: right;
+    padding-right: 5%;
+}
+main {
+    margin-top:8vh;
+    padding-left: 21%;
+    padding-top: 1%;
+    height:-webkit-fill-available;
+    overflow-y:auto;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content;
+}
