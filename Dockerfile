@@ -5,4 +5,5 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 ENV SELENIUM_REMOTE_URL="http://selenium:4444/wd/hub"
+RUN mkdir /downloads
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

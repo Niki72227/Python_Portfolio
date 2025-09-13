@@ -33,6 +33,8 @@ def index(request):
             price = "invalid form"
     all_crypto_symbols = requests.get(f"{API_URL}/crypto_symbols_all").json()
     context["all_crypto_symbols"] = all_crypto_symbols
+    all_stock_symbols = requests.get(f"{API_URL}/stock_symbols_all").json()
+    context["all_stock_symbols"] = all_stock_symbols
     return render(
         request,
             template_name = "mainapp/index.html",

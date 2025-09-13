@@ -57,3 +57,7 @@ def get_analytics(
 @app.get("/crypto_symbols_all", response_model=list[schemas.All_Crypto_Symbols], tags = ["Extra"])
 async def get_crypto_symbols_all(db: Session = Depends(get_db)):
     return await crud.get_all_crypto_symbols(db)
+
+@app.get("/stock_symbols_all", response_model=list[schemas.All_Stock_Symbols], tags = ["Extra"])
+def get_stock_symbols_all(db: Session = Depends(get_db)):
+    return crud.get_all_stock_symbols(db)

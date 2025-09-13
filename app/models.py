@@ -23,3 +23,8 @@ class All_Crypto_Symbols(Base):
     __tablename__ = "all_crypto_symbols"
     id = Column(Integer, primary_key=True)
     symbol = Column(String, nullable=False)
+
+class All_Stock_Symbols(Base):
+    __tablename__ = "all_stock_symbols"
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)

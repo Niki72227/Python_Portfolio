@@ -8,14 +8,7 @@ async def get_binance_price(symbol: str) -> float:
         data = response.json()
         return float(data["price"])
 
-# def get_all_symbols() -> list[str]:
-#     url = "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT"
-#     response = requests.get(url)
-#     data = response.json()
-#     symbols = [s["baseAsset"] for s in data["symbols"] if s["quoteAsset"] == "USDT"]
-#     return symbols
-
-async def get_all_symbols() -> list:
+async def get_all_crypto() -> list:
     url = "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT"
     async with httpx.AsyncClient() as client:
         response = await client.get(url)

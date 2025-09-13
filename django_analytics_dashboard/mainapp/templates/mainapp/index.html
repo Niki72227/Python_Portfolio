@@ -36,7 +36,7 @@
             <form method="get">
                 {% csrf_token %}
                 <td>
-                    <input name="stock_symbol" value="{{ stock_symbol }}">
+                    <input type="search" id='crypto_stock_search' list ="crypto_stock_list" name="stock_symbol" value="{{ stock_symbol }}">
                 </td>
                 <td>
                     <button type="submit" name="action" value="stock">Show</button>
@@ -69,12 +69,13 @@
         </form>
     </table>
         <br>
-    <h1>Experiment</h1>
-    <form>
-        Symbol:
-    </form>
     <datalist id="crypto_symbol_list">
         {% for row in all_crypto_symbols %}
+        <option value="{{row.symbol}}"></option>
+        {% endfor %}
+    </datalist>
+    <datalist id="crypto_stock_list">
+        {% for row in all_stock_symbols %}
         <option value="{{row.symbol}}"></option>
         {% endfor %}
     </datalist>
