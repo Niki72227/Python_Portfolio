@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from app.models import Asset, History, All_Crypto_Symbols, All_Stock_Symbols
+from app.models import Asset, History, All_Crypto_Symbols, All_Stock_Symbols, All_Forex_Symbols
 from datetime import datetime
 from app.clients.binance import get_binance_price, get_all_crypto
 from app.clients.nasdaq import get_nasdaq_price, get_all_stocks
-from app.clients.forex import get_ccy
+from app.clients.forex import get_ccy_price, get_all_forex
 from sqlalchemy import delete
 
 async def get_crypto_price(symbol: str, db: Session):
@@ -57,7 +57,7 @@ def get_all_stock_symbols(db: Session):
         return db.query(All_Stock_Symbols).all()
 
 def get_forex_price(first_ccy:str, second_ccy:str, db: Session):
-    price = get_ccy(first_ccy, second_ccy)
+    price = get_ccy_price(first_ccy.upper(), second_ccy.upper())
     asset = Asset(type="forex", symbol=f"{first_ccy.upper()}/{second_ccy.upper()}", price=price, timestamp=datetime.utcnow())
     db.add(asset)
     db.commit()
@@ -66,6 +66,20 @@ def get_forex_price(first_ccy:str, second_ccy:str, db: Session):
     db.add(history)
     db.commit()
     return asset
+
+def get_all_forex_symbols(db: Session):
+    if len(db.query(All_Forex_Symbols).all()) > 0:
+        return db.query(All_Forex_Symbols).all()
+    else:
+        all_forex_symbols = get_all_forex()
+        db.execute(delete(All_Forex_Symbols))
+        db.commit()
+        for i in all_forex_symbols:
+            forex_symbol = All_Forex_Symbols(symbol=i)
+            db.add(forex_symbol)
+            db.commit()
+            db.refresh(forex_symbol)
+        return db.query(All_Forex_Symbols).all()
 
 def get_history(symbol: str, start: str, end: str, db: Session):
     start_dt = datetime.fromisoformat(start)

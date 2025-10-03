@@ -3,7 +3,7 @@
 {% block title %}Main(Django){% endblock %}
 
 {% block content %}
-<h2>Crypto & Stocks & FX Dashboard (Django)</h2>
+<h2 id="testhead">Crypto & Stocks & FX Dashboard (Django)</h2>
     <table border="1">
         <tr>
             <th>Instrument Type</th>
@@ -15,68 +15,62 @@
             <td>
                 Crypto Symbol:
             </td>
-            <form method="get">
-                {% csrf_token %}
-                <td>
-                    <input type="search" id='crypto_symbol_search' list ="crypto_symbol_list" name="symbol" value="{{ crypto_symbol }}">
-                </td>
-                <td>
-                    <button type="submit" name="action" value="crypto">Show</button>
-                </td>
-            </form>
-
+            <td>
+                <form method="get">
+                    <input type="search" id='crypto_symbol_search' name="crypto_symbol" placeholder="Enter crypto symbol here ...">
+                    <ul id = "crypto_symbol_suggestions" class = "suggestions"></ul>
+                </form>
+            </td>
+            <td>
+                <button type="submit" id = 'crypto_submit_button'>Show</button>
+            </td>
             <th>
-                {{ price_crypto }}
+                <span id = "price_crypto_date"></span>
             </th>
         </tr>
         <tr>
             <td>
                 Stock Symbol:
             </td>
-            <form method="get">
-                {% csrf_token %}
-                <td>
-                    <input type="search" id='crypto_stock_search' list ="crypto_stock_list" name="stock_symbol" value="{{ stock_symbol }}">
-                </td>
-                <td>
-                    <button type="submit" name="action" value="stock">Show</button>
-                </td>
-            </form>
+            <td>
+                <form method="get">
+                    <input type="search" id='stock_symbol_search' name="stock_symbol" placeholder="Enter stock symbol here ...">
+                    <ul id = "stock_symbol_suggestions" class = "suggestions"></ul>
+                </form>
+            </td>
+            <td>
+                <button type="submit" id = 'stock_submit_button'>Show</button>
+            </td>
             <th>
-                {{ price_stock }}
+                <span id = "price_stock_date"></span>
             </th>
         </tr>
-        <form method="get">
-            {% csrf_token %}
-            <tr>
-                <td>
-                    First Currency:
-                </td>
-                <td>
-                    <input name="first_currency" value="{{ first_currency }}">
-                </td>
-                <td rowspan="2">
-                    <button type="submit" name="action" value="forex">Show</button>
-                </td>
-                <th rowspan="2">
-                    {{ price_forex }}
-                </th>
-            </tr>
-            <tr>
-                <td>Second Currency:</td>
-                <td><input name="second_currency" value="{{ second_currency }}"></td>
-            </tr>
-        </form>
+        <tr>
+            <td>First Currency:</td>
+            <td>
+                <form method="get">
+                    <input type="search" id='fccy_symbol_search' name="first_currency" placeholder="Enter currency symbol here ...">
+                    <ul id = "fccy_symbol_suggestions" class = "suggestions"></ul>
+                </form>
+            </td>
+            <td rowspan="2">
+                <button type="submit" id = "ccy_submit_button">Show</button>
+            </td>
+            <th rowspan="2">
+                <span id = "price_ccy_date"></span>
+            </th>
+        </tr>
+        <tr>
+            <td>Second Currency:</td>
+            <td>
+                <form method="get">
+                    <input type="search" id='sccy_symbol_search' name="second_currency" placeholder="Enter currency symbol here ...">
+                    <ul id = "sccy_symbol_suggestions" class = "suggestions"></ul>
+                </form>
+            </td>
+        </tr>
     </table>
         <br>
-    <datalist id="crypto_symbol_list">
-        {% for row in all_crypto_symbols %}
-        <option value="{{row.symbol}}"></option>
-        {% endfor %}
-    </datalist>
-    <datalist id="crypto_stock_list">
-        {% for row in all_stock_symbols %}
-        <option value="{{row.symbol}}"></option>
-        {% endfor %}
-    </datalist>
+{% load static %}
+<script type="text/javascript" src="{% static 'mainapp/js/index.js' %}"></script>
 {% endblock %}

@@ -32,7 +32,6 @@ def get_nasdaq_price(symbol: str) -> float:
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.implicitly_wait(3)
     driver.get(url)
-    print(driver.page_source)
     price = float()
     # Get button and click it
     try:
@@ -96,7 +95,6 @@ def get_all_stocks() -> list:
         with open("table.html", "r", encoding="utf-8") as f:
             table_html = f.read()
         df = pd.read_html(StringIO(table_html))[0]['Symbol'].tolist()
-        print(df)
     except:
         print("no df found")
     driver.quit()

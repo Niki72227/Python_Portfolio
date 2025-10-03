@@ -1,40 +1,13 @@
 from django.shortcuts import render
 import requests
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from sqlalchemy.orm import Session
 
 API_URL = "http://localhost:8000"
 
 def index(request):
     context = {}
-    if request.method == "GET":
-        action = request.GET.get('action')
-        if action == 'crypto':
-            symbol = request.GET.get("crypto_symbol", "BTC")
-            try:
-                price = requests.get(f"{API_URL}/crypto/{symbol.lower()}").json()['price']
-            except:
-                price = "Invalid Crypto Symbol"
-            context = {"crypto_symbol": symbol.upper(), "price_crypto": price}
-        elif action == 'stock':
-            symbol = request.GET.get("stock_symbol", "AAPL")
-            try:
-                price = requests.get(f"{API_URL}/stock/{symbol.upper()}").json()['price']
-            except:
-                price = "Invalid Stock Symbol"
-            context = {"stock_symbol": symbol.upper(), "price_stock": price}
-        elif action == 'forex':
-            first_currency = request.GET.get("first_currency", "USD")
-            second_currency = request.GET.get("second_currency", "EUR")
-            try:
-                price = requests.get(f"{API_URL}/forex/{first_currency}_{second_currency}").json()["price"]
-            except:
-                price = "Invalid Currency Symbols"
-            context = {"first_currency": first_currency.upper(), "second_currency": second_currency.upper(), "price_forex": price}
-        else:
-            price = "invalid form"
-    all_crypto_symbols = requests.get(f"{API_URL}/crypto_symbols_all").json()
-    context["all_crypto_symbols"] = all_crypto_symbols
-    all_stock_symbols = requests.get(f"{API_URL}/stock_symbols_all").json()
-    context["all_stock_symbols"] = all_stock_symbols
     return render(
         request,
             template_name = "mainapp/index.html",
@@ -74,3 +47,43 @@ def queries(request):
             "plot_img": plot_img
         },
     )
+
+def get_crypto_list(request):
+    cs_all_json = requests.get(f"{API_URL}/crypto_symbols_all").json()
+    crypto_symbols = [entry["symbol"] for entry in cs_all_json]
+    query = request.GET.get("q", "").upper()
+    results = [s for s in crypto_symbols if query in s] if query else []
+    return JsonResponse({"results": results})
+
+def get_stock_list(request):
+    ss_all_json = requests.get(f"{API_URL}/stock_symbols_all").json()
+    stock_symbols = [entry["symbol"] for entry in ss_all_json]
+    query = request.GET.get("q", "").upper()
+    results = [s for s in stock_symbols if query in s] if query else []
+    return JsonResponse({"results": results})
+
+def get_ccy_list(request):
+    fs_all_json = requests.get(f"{API_URL}/forex_symbols_all").json()
+    forex_symbols = [entry["symbol"] for entry in fs_all_json]
+    query = request.GET.get("q", "").upper()
+    results = [s for s in forex_symbols if query in s] if query else []
+    return JsonResponse({"results": results})
+
+def get_crypto_price(request):
+    symbol = request.GET.get("q", "").upper()
+    price = requests.get(f"{API_URL}/crypto/{symbol}").json()
+    results = price["price"]
+    return JsonResponse({"results": results})
+
+def get_stock_price(request):
+    symbol = request.GET.get("q", "").upper()
+    price = requests.get(f"{API_URL}/stock/{symbol}").json()
+    results = price["price"]
+    return JsonResponse({"results": results})
+
+def get_ccy_price(request):
+    first_ccy = request.GET.get("q", "").upper()
+    second_ccy = request.GET.get("q", "").upper()
+    price = requests.get(f"{API_URL}/forex/{first_ccy}_{second_ccy}").json()
+    results = price["price"]
+    return JsonResponse({"results": results})

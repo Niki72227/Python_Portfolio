@@ -31,3 +31,9 @@ class All_Stock_Symbols(BaseModel):
     symbol: str
     class Config:
         orm_mode = True
+
+class All_Forex_Symbols(BaseModel):
+    id: int
+    symbol: str
+    class Config:
+        orm_mode = True

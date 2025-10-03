@@ -4,6 +4,7 @@ import datetime
 
 Base = declarative_base()
 
+
 class Asset(Base):
     __tablename__ = "assets"
     id = Column(Integer, primary_key=True)
@@ -26,5 +27,10 @@ class All_Crypto_Symbols(Base):
 
 class All_Stock_Symbols(Base):
     __tablename__ = "all_stock_symbols"
+    id = Column(Integer, primary_key=True)
+    symbol = Column(String, nullable=False)
+
+class All_Forex_Symbols(Base):
+    __tablename__ = "all_forex_symbols"
     id = Column(Integer, primary_key=True)
     symbol = Column(String, nullable=False)

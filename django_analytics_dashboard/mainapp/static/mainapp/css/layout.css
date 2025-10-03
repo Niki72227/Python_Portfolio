@@ -75,3 +75,23 @@ main {
     align-items:flex-start;
     justify-content;
 }
+
+.suggestions {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestions li {
+    padding: 5px;
+    cursor: pointer;
+}
+.suggestions li:hover {
+    background: #eee;
+}
