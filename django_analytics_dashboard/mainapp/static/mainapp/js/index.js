@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                fetch(`${url}?q=${symbol}`)
+                fetch(`${url}?q=${[symbol,symbol2]}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "ok") {
@@ -94,12 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
         }
-
-
-
     }
 
     buttonClick('crypto_symbol_search', 'crypto_submit_button', 'price_crypto_date', '/get-crypto-price/');
     buttonClick('stock_symbol_search', 'stock_submit_button', 'price_stock_date', '/get-stock-price/');
-    buttonClick('fccy_symbol_search', 'ccy_submit_button', 'price_ccy_date', '/get-crypto-price/', "sccy_symbol_search");
+    buttonClick('fccy_symbol_search', 'ccy_submit_button', 'price_ccy_date', '/get-ccy-price/', "sccy_symbol_search");
 });

@@ -24,7 +24,6 @@ services:
     build: .
     restart: always
     volumes:
-      - .:/app
       - ./downloads:/downloads
     depends_on:
       - selenium

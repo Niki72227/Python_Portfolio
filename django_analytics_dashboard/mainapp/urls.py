@@ -11,5 +11,7 @@ urlpatterns = [
     path('get-crypto-price/', views.get_crypto_price, name="get_crypto_price"),
     path('get-stock-price/', views.get_stock_price, name="get_stock_price"),
     path('get-ccy-price/', views.get_ccy_price, name="get_ccy_price"),
+    path('get-asset-list/', views.get_asset_list, name="get_asset_list"),
+    path('get-asset-stats/', views.asset_stats, name="get_asset_stats"),
 
 ]

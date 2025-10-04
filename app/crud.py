@@ -92,3 +92,6 @@ def get_history(symbol: str, start: str, end: str, db: Session):
 
 def get_history_all(db: Session):
     return db.query(History).all()
+
+def get_all_assets(db: Session):
+    return db.query(Asset).all()
